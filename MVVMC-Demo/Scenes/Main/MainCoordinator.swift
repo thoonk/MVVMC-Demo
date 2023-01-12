@@ -16,7 +16,7 @@ final class MainCoordinator: BaseCoordinator {
         let controller = MainViewController()
         let viewModel = MainViewModel()
 //        viewModel.delegate = self
-//        controller.viewModel = viewModel
+        controller.viewModel = viewModel
         
         return controller
     }()

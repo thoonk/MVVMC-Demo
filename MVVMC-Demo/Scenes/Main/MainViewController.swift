@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
-class MainViewController: UIViewController {
-
+final class MainViewController: BaseViewController {
+    
+    var viewModel: MainViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
     }
-
-
 }
 

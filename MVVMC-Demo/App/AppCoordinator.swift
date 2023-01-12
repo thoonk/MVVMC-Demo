@@ -16,35 +16,43 @@ class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        
+        if let isLogined = Defaults.shared.getIsLogined() {
+            if isLogined == true {
+                mainFlow()
+            } else {
+                loginFlow()
+            }
+        } else {
+            loginFlow()
+        }
     }
     
     func loginFlow() {
-//        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
-//        loginCoordinator.delegate = self
-//        store(coordinator: loginCoordinator)
-//        loginCoordinator.start()
+        let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+        loginCoordinator.delegate = self
+        store(coordinator: loginCoordinator)
+        loginCoordinator.start()
     }
     
     func mainFlow() {
-//        let mainCoordinator = MainCoordinator(navigationController: navigationController)
-//        mainCoordinator.delegate = self
-//        store(coordinator: mainCoordinator)
-//        mainCoordinator.start()
+        let mainCoordinator = MainCoordinator(navigationController: navigationController)
+        mainCoordinator.delegate = self
+        store(coordinator: mainCoordinator)
+        mainCoordinator.start()
     }
 }
 
-//extension AppCoordinator: LoginCoordinatorDelegate {
-//    func didFinishLoginCoordinator(coordinator: Coordinator) {
-//        free(coordinator: coordinator)
-//        mainFlow()
-//    }
-//}
+extension AppCoordinator: LoginCoordinatorDelegate {
+    func didFinishLogin(coordinator: Coordinator) {
+        free(coordinator: coordinator)
+        mainFlow()
+    }
+}
 
-//extension AppCoordinator: MainCoordinatorDelegate {
-//    func didFinishMain(coordinator: Coordinator) {
-//        free(coordinator: coordinator)
-//        loginFlow()
-//    }
-//}
+extension AppCoordinator: MainCoordinatorDelegate {
+    func didFinishMain(coordinator: Coordinator) {
+        free(coordinator: coordinator)
+        loginFlow()
+    }
+}
 
